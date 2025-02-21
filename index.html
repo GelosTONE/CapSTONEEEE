@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capstone</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="LOGO_HIV-removebg-preview.png" alt="Logo">
+        </div>
+        <div class="menu-bar" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <nav class="menu" id="menu">
+            <a href="#">Home</a>
+            <a href="#" onclick="toggleAboutHIV()">About HIV</a>
+        
+    </header>
+    <div class="about-hiv" id="aboutHIV" style="display: none; padding: 20px; background: rgba(255, 255, 255, 0.9); border-radius: 10px; margin: 20px; border: 3px solid black;">
+        <h1>About HIV</h1>
+        <p>Human immunodeficiency virus (HIV) is a virus that attacks the body’s immune system. Acquired immunodeficiency syndrome (AIDS) occurs at the most advanced stage of infection.</p>
+        <p>HIV targets the body’s white blood cells, weakening the immune system. This makes it easier to get sick with diseases like tuberculosis, infections, and some cancers.</p>
+        <p>HIV is spread from the body fluids of an infected person, including blood, breast milk, semen, and vaginal fluids. It is not spread by kisses, hugs, or sharing food. It can also spread from a mother to her baby.</p>
+        <p>HIV can be prevented and treated with antiretroviral therapy (ART). Untreated HIV can progress to AIDS, often after many years.</p>
+        <p>WHO now defines Advanced HIV Disease (AHD) as CD4 cell count less than 200 cells/mm³ or WHO stage 3 or 4 in adults and adolescents. All children younger than 5 years of age living with HIV are considered to have advanced HIV disease.</p>
+    </div>
+
+    <main class="content">
+        <div id="stagesContainer" style="display: none; padding: 20px; background: rgba(255, 255, 255, 0.9); border-radius: 10px; margin: 20px; border: 3px solid black;">
+            <h2>Stages of HIV</h2>
+            
+            <h3>Acute HIV Infection</h3>
+            <p>Acute HIV infection is the earliest stage of HIV infection, and it generally develops within 2 to 4 weeks after infection with HIV. Some people have flu-like symptoms such as fever, headache, and rash.</p>
+            <p>During this stage, HIV multiplies rapidly and spreads throughout the body, attacking CD4 cells. The risk of HIV transmission is very high in this stage.</p>
+
+            <h3>Chronic HIV Infection</h3>
+            <p>This is also called asymptomatic HIV infection or clinical latency. HIV continues to multiply but at low levels. People with chronic HIV may not have symptoms.</p>
+            <p>Without ART, this stage usually lasts 10 years or more before progressing to AIDS. However, people taking ART correctly can stay in this stage for decades.</p>
+
+            <h3>AIDS</h3>
+            <p>AIDS is the most severe stage of HIV infection. The immune system is severely damaged, making the body vulnerable to opportunistic infections.</p>
+            <p>People with a CD4 count below 200 or who develop certain infections are diagnosed with AIDS. Without treatment, survival is typically around 3 years.</p>
+        </div>
+    </main>
+
+    <main>
+        <div class="chart-container">
+            <h2>Number of Cases</h2>
+            <canvas id="casesChart"></canvas>
+        </div>
+        <div class="container">
+            <h1>Final Predictive Model</h1>
+            <div class="formula">
+                $$ C(t) = C_0 + \frac{R_0}{\alpha} \ln(1 + \beta e^{-\alpha t}) $$
+            </div>
+            <p>This predicts the total HIV cases at any future time <i>t</i>, given the initial cases <i>C₀</i>, the infection rate <i>R₀</i>, and the impact of interventions.</p>
+            <div class="input-container">
+                <div class="input-group">
+                    <label for="C0">Initial cases (C₀):</label>
+                    <input type="number" id="C0" value="1000">
+                </div>
+                <div class="input-group">
+                    <label for="R0">Infection rate (R₀):</label>
+                    <input type="number" id="R0" value="50">
+                </div>
+                <div class="input-group">
+                    <label for="alpha">Decay factor (α):</label>
+                    <input type="number" step="0.01" id="alpha" value="0.1">
+                </div>
+                <div class="input-group">
+                    <label for="beta">Infection saturation (β):</label>
+                    <input type="number" step="0.01" id="beta" value="2">
+                </div>
+                <div class="input-group">
+                    <label for="t">Time in years (t):</label>
+                    <input type="number" id="t" value="5">
+                </div>
+            </div>
+            <button onclick="calculate()">Calculate C(t)</button>
+            <h2>Predicted Cases: <span id="result">---</span></h2>
+        </div>
+    </nav>
+</header>
+
+<main class="content">
+    <div id="casesContainer" style="display: none;">
+        <h2>HIV Cases Per Year</h2>
+        <canvas id="casesChart"></canvas>
+    </div>
+    </main>
+    <script src="main.js"></script>
+</body>
+</html>
